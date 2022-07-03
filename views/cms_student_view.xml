@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- Form View 1 Of Student's Profiles -->
+    <record id="view_cms_student_form_id" model="ir.ui.view">
+        <field name="name">cms.student.form</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <form string="Student Information">
+                <header>
+                    <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Student Information">
+							<!-- <field name="father_name" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="contact_mobile" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="registration_no" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="contact_phone" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="gender" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="admission_date" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="date_of_birth" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="cgpa" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="age"/>
+                             <!-- <field name="session"/>  -->
+							<field name="active" attrs="{'readonly':[('state','!=','draft')]}"/>
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of Student -->
+    <record id="view_cms_student_tree_id" model="ir.ui.view">
+        <field name="name">student.student.tree</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <tree string="Student Information" create="true" delete="false">
+				<field name="name"/>
+                <!-- <field name="father_name"/> -->
+                <field name="registration_no"/>
+                 <!-- <field name="session"/>  -->
+				<!-- <field name="gender"/> -->
+				<field name="date_of_birth"/>
+				<field name="cgpa"/>
+				<field name="age"/>
+				<!-- <field name="contact_phone"/>
+				<field name="contact_mobile"/>
+				<field name="user_id"/> -->
+				<!-- <field name="state"/> -->
+				<field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Calendar View Of Student -->
+    <!-- <record id="view_cms_student_calendar_id" model="ir.ui.view">
+        <field name="name">cms.student.calendar</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <calendar color="name" date_start="admission_date" string="Gender">
+                <field name="name"/>
+                <field name="admission_date"/>
+                <field name="gender"/>
+            </calendar>
+        </field>
+    </record> -->
+
+    <!-- Search View of Student -->
+    <record id="view_cms_student_search_id" model="ir.ui.view">
+        <field name="name">cms.student.search</field>
+        <field name="model">cms.student</field>
+        <field name="arch" type="xml">
+            <search string="Student Information">
+                <group col="10" colspan="4">
+                    <field name="name"/>
+                    <!-- <field name="father_name"/> -->
+                    <field name="registration_no"/>
+					<field name="cgpa"/>
+                     <!-- <field name="session"/>  -->
+					<field name="date_of_birth"/>
+					<!-- <field name="admission_date"/>
+					<field name="contact_phone"/>
+					<field name="contact_mobile"/> -->
+					<!-- <field name="state"/> -->
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" />
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" /> -->
+                    <!-- <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/> -->
+                </group>
+
+                <separator/>
+                <!-- <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_student_id" model="ir.actions.act_window">
+        <field name="name">CMS Student</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.student</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+        <!-- Student Course -->
+    <record id="view_cms_student_course_form_id" model="ir.ui.view">
+        <field name="name">cms.student_course.form</field>
+        <field name="model">cms.student_course</field>
+        <field name="arch" type="xml">
+            <form string="Student Course Information">
+                <header>
+                    <!-- <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" /> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <!-- <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Student Course Information">
+							<!-- <field name="father_name" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="contact_mobile" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="credit_hours" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="contact_phone" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="gender" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="admission_date" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+
+							<field name="obtained_marks" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="student_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="total_marks" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="percentage"/>
+							
+                            <field name="grade"/>
+                            <field name="grade_point" attrs="{'readonly':[('state','!=','draft')]}"/>
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of Student Course -->
+    <record id="view_cms_student_course_tree_id" model="ir.ui.view">
+        <field name="name">student_course.student_course.tree</field>
+        <field name="model">cms.student_course</field>
+        <field name="arch" type="xml">
+            <tree string="Student Course Information" create="true" delete="false">
+                <field name="credit_hours" />
+				<field name="student_id" />		
+			    <field name="obtained_marks"/>
+                <field name="total_marks"/>
+				<field name="percentage"/>
+                
+                <field name="grade"/>
+				<field name="grade_point"/>
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Search View of Student Course -->
+    <record id="view_cms_student_course_search_id" model="ir.ui.view">
+        <field name="name">cms.student_course.search</field>
+        <field name="model">cms.student_course</field>
+        <field name="arch" type="xml">
+            <search string="Student Course Information">
+                <group col="10" colspan="4">
+                <field name="credit_hours" />
+                <field name="student_id" />
+						
+			    <field name="obtained_marks"/>
+                     
+			    <field name="total_marks"/>
+				<field name="grade"/>
+				<field name="grade_point"/>
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" />
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" /> -->
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <!-- <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_student_course_id" model="ir.actions.act_window">
+        <field name="name">CMS Student</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.student_course</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+
+
+<!-- Semester View -->
+
+     <record id="view_cms_semester_form_id" model="ir.ui.view">
+        <field name="name">cms.semester.form</field>
+        <field name="model">cms.semester</field>
+        <field name="arch" type="xml">
+            <form string="Student Semester Information">
+                <header>
+                    <!-- <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" /> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <!-- <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="Student Semester Information">
+							<!-- <field name="father_name" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="contact_mobile" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<!-- <field name="student_semester_id" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<!-- <field name="contact_phone" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="gender" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<field name="admission_date" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="year" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="session" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="grade"/>
+							<field name="grade_point" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of Semester view -->
+    <record id="view_cms_semester_tree_id" model="ir.ui.view">
+        <field name="name">semester.semester.tree</field>
+        <field name="model">cms.semester</field>
+        <field name="arch" type="xml">
+            <tree string="Student semester Information" create="true" delete="false">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="name" />
+                <field name="year" />
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+				<field name="session" />
+				
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Search View of Semester view -->
+    <record id="view_cms_semester_search_id" model="ir.ui.view">
+        <field name="name">cms.semester.search</field>
+        <field name="model">cms.semester</field>
+        <field name="arch" type="xml">
+            <search string="Student semester Information">
+                <group col="10" colspan="4">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="name" />
+                <field name="year" />
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+				<field name="session" />
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" />
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" /> -->
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <!-- <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_semester_id" model="ir.actions.act_window">
+        <field name="name">CMS Semester</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.semester</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+
+<!-- course offer -->
+
+
+<record id="view_cms_course_offer_form_id" model="ir.ui.view">
+        <field name="name">cms.course_offer.form</field>
+        <field name="model">cms.course_offer</field>
+        <field name="arch" type="xml">
+            <form string="course offer Information">
+                <header>
+                    <!-- <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" /> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <!-- <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="course offer Information">
+
+							<field name="student_course_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="code" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="credit_hrs" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="grade"/>
+							<field name="grade_point" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of course offer view -->
+    <record id="view_cms_course_offer_tree_id" model="ir.ui.view">
+        <field name="name">course_offer.course_offer.tree</field>
+        <field name="model">cms.course_offer</field>
+        <field name="arch" type="xml">
+            <tree string="course offer Information" create="true" delete="false">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="student_course_id"/>
+                <field name="name" />
+				<field name="code"/>
+                <field name="credit_hrs" />
+				
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Search View of course offer view -->
+    <record id="view_cms_course_offer_search_id" model="ir.ui.view">
+        <field name="name">cms.course_offer.search</field>
+        <field name="model">cms.course_offer</field>
+        <field name="arch" type="xml">
+            <search string="course offer Information">
+                <group col="10" colspan="4">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="student_course_id"/>
+                <field name="name" />
+				<field name="code"/>
+                <field name="credit_hrs" />
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" />
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" /> -->
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <!-- <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_course_offer_id" model="ir.actions.act_window">
+        <field name="name">CMS Semester</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.course_offer</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+
+<!-- student semester -->
+
+
+<record id="view_cms_student_semester_form_id" model="ir.ui.view">
+        <field name="name">cms.student_semester.form</field>
+        <field name="model">cms.student_semester</field>
+        <field name="arch" type="xml">
+            <form string="student semester Information">
+                <header>
+                    <!-- <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" /> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <!-- <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="student semester Information">
+
+							<field name="semester_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="student_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+							<field name="sgpa" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="scgpa" attrs="{'readonly':[('state','!=','draft')]}"/>
+							<!-- <field name="grade"/>
+							<field name="grade_point" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+						</group>
+						
+						<!-- <notebook>
+							<page string="Remarks">
+								<field name="remark"/>
+							</page>
+						</notebook> -->
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of student semester view -->
+    <record id="view_cms_student_semester_tree_id" model="ir.ui.view">
+        <field name="name">student_semester.student_semester.tree</field>
+        <field name="model">cms.student_semester</field>
+        <field name="arch" type="xml">
+            <tree string="course offer Information" create="true" delete="false">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="semester_id"/>
+                <field name="student_id"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+				<field name="sgpa"/>
+                <field name="scgpa" />
+				
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Search View of student semester view -->
+    <record id="view_cms_student_semester_search_id" model="ir.ui.view">
+        <field name="name">cms.student_semester.search</field>
+        <field name="model">cms.student_semester</field>
+        <field name="arch" type="xml">
+            <search string="student semester Information">
+                <group col="10" colspan="4">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="semester_id"/>
+                <field name="student_id"/>
+                            <!-- <field name="semester_info" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+				<field name="sgpa"/>
+                <field name="scgpa" />
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                    <!-- <filter name="admission_date" string="Admission Date" help="By Admission Date" context="{'group_by':'admission_date'}" />
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" /> -->
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+                <!-- <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" help="Admission In Draft State"/>
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" help="Admission In Done State"/>
+                <filter name="cancelled" string="Cancelled" domain="[('state','=', 'cancelled')]" help="Admission In Cancelled State"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_student_semester_id" model="ir.actions.act_window">
+        <field name="name">CMS Semester</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.student_semester</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+<!-- transcript -->
+
+
+<record id="view_cms_student_semester_form_id" model="ir.ui.view">
+        <field name="name">cms.transcript.form</field>
+        <field name="model">cms.transcript</field>
+        <field name="arch" type="xml">
+            <form string="transcript Information">
+                <header>
+                    <!-- <button class="oe_stat_button" name="set_done" string="Done" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" />
+                    <button class="oe_stat_button" name="set_cancel" string="Cancel" type="object" icon="fa-check" states="draft" groups="cms_student.group_campus_administrator" /> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft" attrs="{'invisible':[('state','=','done')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <!-- <field name="name" placeholder="Student Name" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                        </h1>
+                     </div>
+                     
+                     <div>
+						<group colspan="4" col="4" string="transcript Information">
+
+                            <field name="student_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+            
+							<!-- <field name="grade"/>
+							<field name="grade_point" attrs="{'readonly':[('state','!=','draft')]}"/> -->
+						</group>
+
+							
+					</div>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+    <!-- Tree View of student semester view -->
+    <record id="view_cms_transcript_tree_id" model="ir.ui.view">
+        <field name="name">transcript.transcript.tree</field>
+        <field name="model">cms.transcript</field>
+        <field name="arch" type="xml">
+            <tree string="course offer Information" create="true" delete="false">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="student_id"/>
+
+				
+               
+            </tree>
+        </field>
+    </record>
+
+    
+
+    <!-- Search View of student semester view -->
+    <record id="view_cms_transcript_search_id" model="ir.ui.view">
+        <field name="name">cms.transcript.search</field>
+        <field name="model">cms.transcript</field>
+        <field name="arch" type="xml">
+            <search string="transcript Information">
+                <group col="10" colspan="4">
+                <!-- <field name="student_semester_id" /> -->
+				
+				<field name="student_id"/>
+
+
+
+                </group>
+                <newline />
+                <group expand="0" string="Group By" colspan="12" col="10">
+                   
+                    <filter name="state" string="State" help="By State" context="{'group_by':'state'}"/>
+                </group>
+
+                <separator/>
+               
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cms_transcript_id" model="ir.actions.act_window">
+        <field name="name">CMS Semester</field>
+        <field name="domain">[('active','=',True)]</field>
+        <field name="res_model">cms.transcript</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+
+
+
+    <!-- Top Menu CMS -->
+    <menuitem id="menu_main_campus_id" name="CMS" web_icon="cms_student,static/description/icon.png" sequence="1" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <!-- Menu Student -->
+    <menuitem id="menu_cms_student_main_id" name="CMS Student" parent="menu_main_campus_id" sequence="1" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_1" name="Student" parent="menu_cms_student_main_id" action="action_cms_student_id" sequence="21" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_2" name="Student Course" parent="menu_cms_student_main_id" action="action_cms_student_course_id" sequence="22" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_3" name="Semester" parent="menu_cms_student_main_id" action="action_cms_semester_id" sequence="22" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_4" name="course offer" parent="menu_cms_student_main_id" action="action_cms_course_offer_id" sequence="22" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_5" name="student semester" parent="menu_cms_student_main_id" action="action_cms_student_semester_id" sequence="22" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_6" name="transcript" parent="menu_cms_student_main_id" action="action_cms_transcript_id" sequence="22" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+
+    <!-- <menuitem id="menu_cms_student_2" name="Semester" parent="menu_cms_student_main_id" action="action_cms_student_semester_id" sequence="21" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_3" name="Course" parent="menu_cms_student_main_id" action="action_cms_course_id" sequence="21" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_4" name="Transcript" parent="menu_cms_student_main_id" action="action_cms_transcript_id" sequence="21" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/> -->
+    <menuitem id="menu_cms_student_report_id" name="CMS Reports" parent="menu_main_campus_id" sequence="2" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+    <menuitem id="menu_cms_student_report_1_id" name="Student Report" parent="menu_cms_student_report_id" action="action_wizard_report_1_id" sequence="21" groups="cms_student.group_campus_administrator,cms_student.group_campus_user"/>
+</odoo>
